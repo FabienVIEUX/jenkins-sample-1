@@ -27,5 +27,14 @@ A logic review is suggested.
 		step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'fabien.vieux@gmail.Com', sendToIndividuals: false])
  
 	}
+	stage ('APP-IC - Quality Analysis') {
+		withMaven(maven: 'maven') { 
+				if(isUnix()) {
+					sh "mvn sonar:sonar" 
+				} else { 
+					bat "mvn sonar:sonar" 
+				} 
+			} 
+	}
 }
 }
