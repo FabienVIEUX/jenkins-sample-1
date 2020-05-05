@@ -36,5 +36,14 @@ A logic review is suggested.
 				} 
 			} 
 	}
+	stage ('APP-IC - Deploy') {
+		withMaven(maven: 'maven') { 
+				if(isUnix()) {
+					sh "mvn clean deploy" 
+				} else { 
+					bat "mvn clean deploy" 
+				} 
+			} 
+	}
 }
 }
